@@ -3,6 +3,10 @@ const Sentry = require('@sentry/node');
 const amqp = require('amqplib');
 const RESULTS_QUEUE_NAME = 'results';
 const QUEUE_NAME = 'tasks';
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 5000;
 
 const processTask = async (data) => {
     try {
@@ -69,3 +73,7 @@ const startWorker = async () => {
 };
 
 startWorker();
+
+app.listen(PORT, () => {
+    console.log(`Microservice M1 on port ${PORT}`);
+});
